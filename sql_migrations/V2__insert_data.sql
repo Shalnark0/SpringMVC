@@ -1,0 +1,1 @@
+mysqldump --no-create-info -u root -p productmanager > data.sql
