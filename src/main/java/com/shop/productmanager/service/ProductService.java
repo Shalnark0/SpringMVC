@@ -33,12 +33,15 @@ public class ProductService {
         return productRepo.save(product);
     }
 
-    public Product findProductById(Long id){
+    public Product findProductById(final Long id){
         return productRepo.findProductById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product by id " + id + "not found"));
     }
 
     public void deleteProduct(Long id){
+        if(id == null){
+            throw new NullPointerException("id cant be null");
+        }
         productRepo.deleteProductById(id);
     }
 }
