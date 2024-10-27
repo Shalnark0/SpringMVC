@@ -1,1 +1,0 @@
-mysqldump --no-data -u root -p productmanager > structure.sql

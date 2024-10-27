@@ -1,5 +1,20 @@
 version: '3.8'
+
 services:
+  backend:
+    build: .
+    ports:
+      - "8080:8080"  # Порт для вашего бэкенда
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/productmanager
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - mysql
+    restart: always
+    networks:
+      - my-network
+
   mysql:
     image: mysql:latest
     restart: always
@@ -7,4 +22,10 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: productmanager
     ports:
-      - "3307:3306"
+      - "3307:3306"  # Внешний порт 3307, внутренний 3306
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
