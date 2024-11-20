@@ -16,7 +16,7 @@ public class  ProductResource {
     public ProductResource(ProductService productService) {
         this.productService = productService;
     }
-
+  
     @GetMapping("/all")
     public ResponseEntity<List<Product>> getAllProducts (){
         List<Product> products = productService.findAllProducts();
@@ -31,6 +31,7 @@ public class  ProductResource {
 
     @PostMapping("/add")
     public ResponseEntity<Product> addProduct(@RequestBody Product product){
+        System.out.println("Incoming JSON: " + product);
         Product newProduct = productService.addProduct(product);
         return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
     }
